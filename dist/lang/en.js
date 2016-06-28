@@ -22,7 +22,7 @@ window.SwaggerTranslator.learn({
     "Response Headers":"Response Headers",
     "Hide Response":"Hide Response",
     "Headers":"Headers",
-    "Try it out!":"Try it out!",
+    "Try it out!":"Submit",
     "Show/Hide":"Show/Hide",
     "List Operations":"List Operations",
     "Expand Operations":"Expand Operations",

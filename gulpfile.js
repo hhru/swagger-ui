@@ -10,7 +10,7 @@ var less = require('gulp-less');
 var wrap = require('gulp-wrap');
 var watch = require('gulp-watch');
 var connect = require('gulp-connect');
-var header = require('gulp-header');
+// var header = require('gulp-header');
 var order = require('gulp-order');
 var jshint = require('gulp-jshint');
 var pkg = require('./package.json');
@@ -61,7 +61,7 @@ function _dist() {
     .pipe(order(['scripts.js', 'templates.js']))
     .pipe(concat('swagger-ui.js'))
     .pipe(wrap('(function(){<%= contents %>}).call(this);'))
-    .pipe(header(banner, { pkg: pkg }))
+    // .pipe(header(banner, { pkg: pkg }))
     .pipe(gulp.dest('./dist'))
     .pipe(uglify())
     .on('error', log)

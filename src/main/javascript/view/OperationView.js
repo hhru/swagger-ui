@@ -369,6 +369,13 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
   // Note: copied from CoffeeScript compiled file
   // TODO: redactor
   submitOperation: function(e) {
+    var batchSize = $('.sandbox', $(this.el)).find('.response_number').val();
+    for (var l = 0; l < batchSize;  l++) {
+      this.submitOperationBatch(e);
+    }
+  },
+  
+  submitOperationBatch: function(e) {
     var error_free, form, isFileUpload, map, opts;
     if (e !== null) {
       e.preventDefault();
@@ -680,8 +687,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
     var pre;
     var code;
+    var oldCode = $('.response_body > pre', $(this.el)).html();
+    var delimiter ='<div>-------------------------------------------------------------------------------------<br></div>'; 
     if (!content) {
-      code = $('<code />').text('no content');
+      code = $(oldCode).before($('<code />').text('no content').append(delimiter));
       pre = $('<pre class="json" />').append(code);
 
       // JSON
@@ -692,22 +701,22 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       } catch (_error) {
         json = 'can\'t parse JSON.  Raw result:\n\n' + content;
       }
-      code = $('<code />').text(json);
+      code = $(oldCode).before($('<code />').text(json).append(delimiter));
       pre = $('<pre class="json" />').append(code);
 
       // XML
     } else if (contentType === 'application/xml' || /\+xml$/.test(contentType)) {
-      code = $('<code />').text(this.formatXml(content));
+      code = $(oldCode).before($('<code />').text(this.formatXml(content)).append(delimiter));
       pre = $('<pre class="xml" />').append(code);
 
       // HTML
     } else if (contentType === 'text/html') {
-      code = $('<code />').html(_.escape(content));
+      code = $(oldCode).before($('<code />').html(_.escape(content)));
       pre = $('<pre class="xml" />').append(code);
 
       // Plain Text
     } else if (/text\/plain/.test(contentType)) {
-      code = $('<code />').text(content);
+      code = $(oldCode).before($('<code />').text(content));
       pre = $('<pre class="plain" />').append(code);
 
 
@@ -757,7 +766,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
       // Anything else (CORS)
     } else {
-      code = $('<code />').text(content);
+      code = $(oldCode).before($('<code />').text(content));
       pre = $('<pre class="json" />').append(code);
     }
     var response_body = pre;
@@ -798,6 +807,11 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
   toggleOperationContent: function (event) {
     var elem = $('#' + Docs.escapeResourceName(this.parentId + '_' + this.nickname + '_content'));
+    
+    if (this.model.summary.indexOf('[BATCH]') > -1){
+      $('.response_number', $(this.el)).show();
+    }
+    
     if (elem.is(':visible')){
       $.bbq.pushState('#/', 2);
       event.preventDefault();

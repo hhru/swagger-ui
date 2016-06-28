@@ -26,39 +26,39 @@
         {{#if security}}
             <div class='authorize-wrapper authorize-wrapper_operation'></div>
         {{/if}}
-        {{#if type}}
-          <div class="response-class">
-            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> {{{escape successCode}}})</h4>
-              {{#if successDescription}}<div class="markdown">{{{sanitize successDescription}}}</div>{{/if}}
-            <p><span class="model-signature" /></p>
-            <br/>
-            <div class="response-content-type" />
-            </div>
-        {{/if}}
+        {{!--{{#if type}}--}}
+          {{!--<div class="response-class">--}}
+            {{!--<h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> {{{escape successCode}}})</h4>--}}
+              {{!--{{#if successDescription}}<div class="markdown">{{{sanitize successDescription}}}</div>{{/if}}--}}
+            {{!--<p><span class="model-signature" /></p>--}}
+            {{!--<br/>--}}
+            {{!--<div class="response-content-type" />--}}
+            {{!--</div>--}}
+        {{!--{{/if}}--}}
 
-        {{#if headers}}
-          <h4 data-sw-translate>Headers</h4>
-          <table class="headers">
-            <thead>
-              <tr>
-                <th style="width: 100px; max-width: 100px" data-sw-translate>Header</th>
-                <th style="width: 310px; max-width: 310px" data-sw-translate>Description</th>
-                <th style="width: 200px; max-width: 200px" data-sw-translate>Type</th>
-                <th style="width: 320px; max-width: 320px" data-sw-translate>Other</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each headers}}
-              <tr>
-                <td>{{@key}}</td>
-                <td>{{{sanitize this.description}}}</td>
-                <td>{{{escape this.type}}}</td>
-                <td>{{{escape this.other}}}</td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        {{/if}}
+        {{!--{{#if headers}}--}}
+          {{!--<h4 data-sw-translate>Headers</h4>--}}
+          {{!--<table class="headers">--}}
+            {{!--<thead>--}}
+              {{!--<tr>--}}
+                {{!--<th style="width: 100px; max-width: 100px" data-sw-translate>Header</th>--}}
+                {{!--<th style="width: 310px; max-width: 310px" data-sw-translate>Description</th>--}}
+                {{!--<th style="width: 200px; max-width: 200px" data-sw-translate>Type</th>--}}
+                {{!--<th style="width: 320px; max-width: 320px" data-sw-translate>Other</th>--}}
+              {{!--</tr>--}}
+            {{!--</thead>--}}
+            {{!--<tbody>--}}
+              {{!--{{#each headers}}--}}
+              {{!--<tr>--}}
+                {{!--<td>{{@key}}</td>--}}
+                {{!--<td>{{{sanitize this.description}}}</td>--}}
+                {{!--<td>{{{escape this.type}}}</td>--}}
+                {{!--<td>{{{escape this.other}}}</td>--}}
+              {{!--</tr>--}}
+              {{!--{{/each}}--}}
+            {{!--</tbody>--}}
+            {{!--</table>--}}
+          {{!--{{/if}}--}}
 
         <form accept-charset='UTF-8' class='sandbox'>
           <div style='margin:0;padding:0;display:inline'></div>
@@ -99,26 +99,27 @@
           {{else}}
           <div class='sandbox_header'>
             <input class='submit' type='submit' value='Try it out!' data-sw-translate/>
+            <input class='response_number' type="number" name="count" value="1" min="1" max="1000" style='display:none' />
             <a href='#' class='response_hider' style='display:none' data-sw-translate>Hide Response</a>
             <span class='response_throbber' style='display:none'></span>
           </div>
           {{/if}}
         </form>
         <div class='response' style='display:none'>
-          <h4 class='curl'>Curl</h4>
-          <div class='block curl'></div>
           <h4 data-sw-translate>Request URL</h4>
           <div class='block request_url'></div>
-          {{#if showRequestHeaders}}
-          <h4 data-sw-translate>Request Headers</h4>
-          <div class='block request_headers'></div>
-          {{/if}}
+          {{!--{{#if showRequestHeaders}}--}}
+          {{!--<h4 data-sw-translate>Request Headers</h4>--}}
+          {{!--<div class='block request_headers'></div>--}}
+          {{!--{{/if}}--}}
           <h4 data-sw-translate>Response Body</h4>
           <div class='block response_body'></div>
-          <h4 data-sw-translate>Response Code</h4>
-          <div class='block response_code'></div>
-          <h4 data-sw-translate>Response Headers</h4>
-          <div class='block response_headers'></div>
+          <h4 class='curl'>Curl</h4>
+          <div class='block curl'></div>
+          <!--<h4 data-sw-translate>Response Code</h4>-->
+          <!--<div class='block response_code'></div>-->
+          <!--<h4 data-sw-translate>Response Headers</h4>-->
+          <!--<div class='block response_headers'></div>-->
         </div>
       </div>
     </li>
