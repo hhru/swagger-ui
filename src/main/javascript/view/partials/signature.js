@@ -503,18 +503,18 @@ SwaggerUi.partials.signature = (function () {
         output = schema.default;
       } else if (type === 'string') {
         if (format === 'date-time') {
-          output = new Date().toISOString();
+          return; //new Date().toISOString();
         } else if (format === 'date') {
-          output = new Date().toISOString().split('T')[0];
+          return; //new Date().toISOString().split('T')[0];
         } else {
-          output = 'string';
+          return; //'string';
         }
       } else if (type === 'integer') {
-        output = 0;
+        return; //0;
       } else if (type === 'number') {
-        output = 0.0;
+        return; //0.0;
       } else if (type === 'boolean') {
-        output = true;
+        output = false;
       } else if (type === 'object') {
         output = {};
 
@@ -534,7 +534,10 @@ SwaggerUi.partials.signature = (function () {
             output.push(schemaToJSON(item, models, modelsToIgnore, modelPropertyMacro));
           });
         } else if (_.isPlainObject(schema.items)) {
-          output.push(schemaToJSON(schema.items, models, modelsToIgnore, modelPropertyMacro));
+          var obj_items = schemaToJSON(schema.items, models, modelsToIgnore, modelPropertyMacro);
+          if (!_.isUndefined(obj_items)){
+            output.push(obj_items);
+          }
         } else if (_.isUndefined(schema.items)) {
           output.push({});
         } else {
