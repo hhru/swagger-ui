@@ -36,7 +36,11 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]) + "/swagger.json";
       } else {
-        url = "http://" + window.location.hostname + ":3300/swagger.json";
+        if (window.location.port === "14950") {
+          url = "http://" + window.location.hostname + ":14900/swagger.json";
+        } else {
+          url = "http://" + window.location.hostname + ":3300/swagger.json";
+        }
       }
 
       $("#main_link").attr("href", "http://" + window.location.host);
