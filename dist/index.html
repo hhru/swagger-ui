@@ -38,6 +38,8 @@
       } else {
         if (window.location.port === "14950") {
           url = "http://" + window.location.hostname + ":14900/swagger.json";
+        } else if (window.location.port === "4850") {
+          url = "http://" + window.location.hostname + ":4800/swagger.json";
         } else {
           url = "http://" + window.location.hostname + ":3300/swagger.json";
         }
